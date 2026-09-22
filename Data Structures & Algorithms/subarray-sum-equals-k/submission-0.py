@@ -1,0 +1,16 @@
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        prefix_count = {0: 1}
+
+        current_sum = 0
+        count = 0
+
+        for i in range(len(nums)):
+            current_sum += nums[i]
+            prefix_sum = current_sum - k
+            if prefix_sum in prefix_count:
+                count += prefix_count[prefix_sum]
+            
+            prefix_count[current_sum] = prefix_count.get(current_sum, 0) + 1
+        
+        return count
